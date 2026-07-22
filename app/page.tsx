@@ -1,7 +1,17 @@
+import { Hero } from '@/components/sections/Hero';
+import { Pillars } from '@/components/sections/Pillars';
+import { FeatureList } from '@/components/sections/FeatureList';
+import { SocialProof } from '@/components/sections/SocialProof';
+import { CtaBand } from '@/components/sections/CtaBand';
+
 export default function Home() {
   return (
-    <main className="grid min-h-screen place-items-center text-3xl font-semibold text-primary-700">
-      Tripvia
-    </main>
+    <>
+      <Hero />
+      <Pillars />
+      <FeatureList />
+      <SocialProof />
+      <CtaBand />
+    </>
   );
 }
