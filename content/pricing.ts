@@ -23,7 +23,7 @@ export const pricing: PricingTier[] = [
       'PDF export',
     ],
     cta: 'Get started',
-    ctaHref: '#download',
+    ctaHref: '/#download',
   },
   {
     name: 'Pro',
@@ -38,7 +38,7 @@ export const pricing: PricingTier[] = [
       'Offline-first cloud sync',
     ],
     cta: 'Start free trial',
-    ctaHref: '#download',
+    ctaHref: '/#download',
     highlighted: true,
   },
   {
