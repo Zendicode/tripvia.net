@@ -1,15 +1,18 @@
 import type { ReactNode } from 'react';
 import { Container } from '@/components/ui/Container';
 
-/** Shared long-form layout for Privacy / Terms pages. */
+/** Shared long-form layout for Privacy / Terms / Delete-account pages. */
 export function LegalPage({
   title,
   updated,
   children,
+  footer,
 }: {
   title: string;
-  updated: string;
+  updated?: string;
   children: ReactNode;
+  /** Optional operator / legal-entity line rendered under a divider. */
+  footer?: ReactNode;
 }) {
   return (
     <article className="py-16 sm:py-24">
@@ -18,12 +21,15 @@ export function LegalPage({
           <h1 className="text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
             {title}
           </h1>
-          <p className="mt-3 text-sm text-ink-muted">Last updated {updated}</p>
-          <p className="mt-6 rounded-2xl border border-primary/30 bg-primary-tint/60 px-4 py-3 text-sm text-primary-700">
-            This is placeholder text and not legal advice. Replace it with your
-            finalized {title.toLowerCase()} before launch.
-          </p>
+          {updated && (
+            <p className="mt-3 text-sm text-ink-muted">Last updated {updated}</p>
+          )}
           <div className="mt-8 space-y-8">{children}</div>
+          {footer && (
+            <div className="mt-12 border-t border-border pt-6 text-sm text-ink-muted">
+              {footer}
+            </div>
+          )}
         </div>
       </Container>
     </article>

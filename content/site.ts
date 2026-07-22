@@ -50,6 +50,7 @@ export const site = {
       links: [
         { label: 'Privacy', href: '/privacy' },
         { label: 'Terms', href: '/terms' },
+        { label: 'Delete account', href: '/delete-account' },
       ],
     },
   ] as FooterColumn[],

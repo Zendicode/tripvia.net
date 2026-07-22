@@ -8,6 +8,7 @@ const routes = [
   '/support',
   '/privacy',
   '/terms',
+  '/delete-account',
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
