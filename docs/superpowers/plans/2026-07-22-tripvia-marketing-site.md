@@ -8,7 +8,7 @@
 
 **Tech Stack:** Next.js 14.2 (App Router, `output: 'export'`), React 18.3, TypeScript 5, Tailwind CSS 3.4, Framer Motion 11, lucide-react, Vitest + React Testing Library (logic tests only).
 
-## Global Constraints
+## Global Constraints 
 
 - Node 20; package manager npm.
 - Next config: `output: 'export'`, `images: { unoptimized: true }`, `trailingSlash: true`, **no** `basePath` (apex custom domain).
