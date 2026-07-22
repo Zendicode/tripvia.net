@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Design tokens — space-separated RGB channels so Tailwind can apply
+     opacity modifiers via rgb(var(--x) / <alpha-value>). */
+  --bg: 250 248 243;
+  --bg-alt: 237 247 241;
+  --surface: 255 255 255;
+  --ink: 26 28 24;
+  --ink-muted: 92 97 89;
+  --primary: 34 196 129;
+  --primary-600: 23 168 108;
+  --primary-700: 15 125 79;
+  --primary-tint: 221 243 232;
+  --forest: 11 61 40;
+  --border: 231 227 216;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg text-ink antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-semibold tracking-tight text-ink;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-bg;
+  }
+
+  ::selection {
+    @apply bg-primary/25;
+  }
+}
+
+/* Respect users who prefer reduced motion: neutralize all animation. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
