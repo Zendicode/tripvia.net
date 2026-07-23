@@ -28,8 +28,13 @@ export default function DeleteAccountPage() {
       <section className="space-y-3 text-ink-muted">
         <LangLabel>English</LangLabel>
         <p>
-          You can permanently delete your Tripvia account and all associated
-          data by emailing{' '}
+          The fastest way to delete your account is in the app: open the app,
+          go to <strong className="text-ink">Settings → Delete account</strong>,
+          and confirm. Your account and data are deleted immediately.
+        </p>
+        <p>
+          If you don&rsquo;t have access to the app, you can also delete your
+          account by emailing{' '}
           <a className={link} href="mailto:info@weblioapp.com">
             info@weblioapp.com
           </a>{' '}
@@ -56,8 +61,14 @@ export default function DeleteAccountPage() {
           Zmazanie účtu a údajov Tripvia
         </h2>
         <p>
-          Svoj účet Tripvia a všetky súvisiace údaje môžete natrvalo zmazať tak,
-          že napíšete na{' '}
+          Najrýchlejší spôsob zmazania účtu je priamo v aplikácii: otvorte
+          aplikáciu, prejdite na{' '}
+          <strong className="text-ink">Nastavenia → Zmazať účet</strong> a
+          potvrďte. Váš účet a údaje sa zmažú okamžite.
+        </p>
+        <p>
+          Ak nemáte prístup k aplikácii, svoj účet môžete zmazať aj tak, že
+          napíšete na{' '}
           <a className={link} href="mailto:info@weblioapp.com">
             info@weblioapp.com
           </a>{' '}
