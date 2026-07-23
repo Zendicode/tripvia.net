@@ -3,11 +3,20 @@ import type { Feature } from '@/content/features';
 import { Reveal } from '@/components/ui/Reveal';
 import { RouteMap } from '@/components/graphics/RouteMap';
 import { cn } from '@/lib/cn';
+import type { Locale } from '@/lib/i18n';
+import { getPageCopy } from '@/content/pageCopy';
 
 /** The visual panel beside a feature: the real route map for the maps
  *  feature, otherwise a consistent placeholder "app screen" card. */
-function FeatureVisual({ feature }: { feature: Feature }) {
+function FeatureVisual({
+  feature,
+  locale,
+}: {
+  feature: Feature;
+  locale: Locale;
+}) {
   const Icon = feature.icon;
+  const copy = getPageCopy(locale).hero;
 
   if (feature.id === 'google-maps') {
     return (
@@ -36,10 +45,10 @@ function FeatureVisual({ feature }: { feature: Feature }) {
         </div>
         <div className="mt-5 flex gap-2">
           <span className="rounded-full bg-primary-tint px-3 py-1 text-xs font-bold text-primary-700">
-            Business
+            {copy.business}
           </span>
           <span className="rounded-full bg-bg-alt px-3 py-1 text-xs font-medium text-ink-muted">
-            Personal
+            {copy.personal}
           </span>
         </div>
       </div>
@@ -50,9 +59,11 @@ function FeatureVisual({ feature }: { feature: Feature }) {
 export function FeatureHighlight({
   feature,
   flip,
+  locale,
 }: {
   feature: Feature;
   flip?: boolean;
+  locale: Locale;
 }) {
   const Icon = feature.icon;
 
@@ -81,7 +92,7 @@ export function FeatureHighlight({
       </Reveal>
 
       <Reveal delay={0.08} className={cn(flip && 'lg:order-1')}>
-        <FeatureVisual feature={feature} />
+        <FeatureVisual feature={feature} locale={locale} />
       </Reveal>
     </div>
   );

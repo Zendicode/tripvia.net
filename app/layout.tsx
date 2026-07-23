@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
-import { site } from '@/content/site';
+import { getCurrentLocale } from '@/lib/i18n';
+import { getSiteCopy, site } from '@/content/site';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 
@@ -14,10 +15,10 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — ${site.tagline}`,
+    default: `${site.name} — ${getSiteCopy('en').tagline}`,
     template: `%s — ${site.name}`,
   },
-  description: site.description,
+  description: getSiteCopy('en').description,
   applicationName: site.name,
   keywords: [
     'mileage tracker',
@@ -31,13 +32,13 @@ export const metadata: Metadata = {
     type: 'website',
     url: site.url,
     siteName: site.name,
-    title: `${site.name} — ${site.tagline}`,
-    description: site.description,
+    title: `${site.name} — ${getSiteCopy('en').tagline}`,
+    description: getSiteCopy('en').description,
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${site.name} — ${site.tagline}`,
-    description: site.description,
+    title: `${site.name} — ${getSiteCopy('en').tagline}`,
+    description: getSiteCopy('en').description,
   },
 };
 
@@ -45,23 +46,26 @@ export const viewport: Viewport = {
   themeColor: '#22C481',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const locale = await getCurrentLocale();
+  const copy = getSiteCopy(locale);
+
   return (
-    <html lang="en" className={jakarta.variable}>
+    <html lang={locale} className={jakarta.variable}>
       <body className="font-sans">
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-primary-700 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
         >
-          Skip to content
+          {copy.ui.skipToContent}
         </a>
-        <Header />
+        <Header locale={locale} copy={copy} />
         <main id="main">{children}</main>
-        <Footer />
+        <Footer locale={locale} />
       </body>
     </html>
   );

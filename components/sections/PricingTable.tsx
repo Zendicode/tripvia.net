@@ -3,10 +3,15 @@ import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { Button } from '@/components/ui/Button';
-import { pricing } from '@/content/pricing';
+import type { Locale } from '@/lib/i18n';
+import { getPageCopy } from '@/content/pageCopy';
+import { getPricing } from '@/content/pricing';
 import { cn } from '@/lib/cn';
 
-export function PricingTable() {
+export function PricingTable({ locale }: { locale: Locale }) {
+  const pricing = getPricing(locale);
+  const copy = getPageCopy(locale).ui;
+
   return (
     <Section>
       <Container>
@@ -23,7 +28,7 @@ export function PricingTable() {
               >
                 {tier.highlighted && (
                   <span className="mb-4 inline-flex w-fit items-center rounded-full bg-primary-700 px-3 py-1 text-xs font-bold text-white">
-                    Most popular
+                    {copy.mostPopular}
                   </span>
                 )}
                 <h3 className="text-lg font-bold text-ink">{tier.name}</h3>
@@ -60,8 +65,7 @@ export function PricingTable() {
           ))}
         </div>
         <p className="mt-8 text-center text-sm text-ink-muted">
-          Prices shown are placeholders and may change before launch. All paid
-          plans include a free trial.
+          {copy.pricingPlaceholder}
         </p>
       </Container>
     </Section>

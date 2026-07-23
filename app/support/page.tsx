@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { Mail } from 'lucide-react';
+import { getCurrentLocale } from '@/lib/i18n';
+import { getPageCopy } from '@/content/pageCopy';
 import { PageHeader } from '@/components/sections/PageHeader';
 import { FaqSection } from '@/components/sections/FaqSection';
 import { Container } from '@/components/ui/Container';
@@ -14,15 +16,18 @@ export const metadata: Metadata = {
     'Answers to common questions about Tripvia, plus how to get in touch with our team.',
 };
 
-export default function SupportPage() {
+export default async function SupportPage() {
+  const locale = await getCurrentLocale();
+  const copy = getPageCopy(locale).supportPage;
+
   return (
     <>
       <PageHeader
-        eyebrow="Support"
-        title="How can we help?"
-        subtitle="Find quick answers below, or reach out and we will get back to you."
+        eyebrow={copy.eyebrow}
+        title={copy.title}
+        subtitle={copy.subtitle}
       />
-      <FaqSection />
+      <FaqSection locale={locale} />
       <Section alt>
         <Container>
           <Reveal>
@@ -31,13 +36,11 @@ export default function SupportPage() {
                 <Mail className="h-6 w-6" aria-hidden="true" />
               </span>
               <h2 className="mt-5 text-2xl font-bold text-ink">
-                Still have questions?
+                {copy.cardTitle}
               </h2>
-              <p className="mt-2 text-ink-muted">
-                Email our team and we will help you get set up.
-              </p>
+              <p className="mt-2 text-ink-muted">{copy.cardBody}</p>
               <div className="mt-6">
-                <Button href={`mailto:${site.email}`}>Email support</Button>
+                <Button href={`mailto:${site.email}`}>{copy.cardCta}</Button>
               </div>
             </div>
           </Reveal>

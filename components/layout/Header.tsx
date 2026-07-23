@@ -2,15 +2,23 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { site } from '@/content/site';
+import type { Locale } from '@/lib/i18n';
+import type { SiteCopy } from '@/content/site';
 import { Logo } from '@/components/graphics/Logo';
 import { Button } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
+import { LanguageSwitcher } from './LanguageSwitcher';
 import { MobileNav } from './MobileNav';
 import { cn } from '@/lib/cn';
 
 /** Sticky site header: transparent over the hero, solid once scrolled. */
-export function Header() {
+export function Header({
+  locale,
+  copy,
+}: {
+  locale: Locale;
+  copy: SiteCopy;
+}) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -31,12 +39,12 @@ export function Header() {
     >
       <Container>
         <div className="flex h-16 items-center justify-between gap-4">
-          <Link href="/" aria-label="Tripvia home" className="rounded-lg">
+          <Link href="/" aria-label={copy.ui.homeAria} className="rounded-lg">
             <Logo />
           </Link>
 
           <nav className="hidden items-center gap-1 md:flex">
-            {site.nav.map((item) => (
+            {copy.nav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -47,11 +55,12 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="hidden md:block">
-            <Button href="/#download">Get the app</Button>
+          <div className="hidden items-center gap-3 md:flex">
+            <LanguageSwitcher locale={locale} label={copy.ui.language} />
+            <Button href="/#download">{copy.ui.getApp}</Button>
           </div>
 
-          <MobileNav />
+          <MobileNav locale={locale} copy={copy} />
         </div>
       </Container>
     </header>

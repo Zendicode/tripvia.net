@@ -1,12 +1,20 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
+
+vi.mock('next/navigation', () => ({
+  useRouter: () => ({
+    refresh: vi.fn(),
+  }),
+}));
+
 import { MobileNav } from '@/components/layout/MobileNav';
+import { getSiteCopy } from '@/content/site';
 
 describe('MobileNav', () => {
   it('opens and closes the slide-in menu', async () => {
     const user = userEvent.setup();
-    render(<MobileNav />);
+    render(<MobileNav locale="en" copy={getSiteCopy('en')} />);
 
     const openBtn = screen.getByRole('button', { name: /open menu/i });
     expect(openBtn).toHaveAttribute('aria-expanded', 'false');

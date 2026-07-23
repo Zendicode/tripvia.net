@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { getCurrentLocale } from '@/lib/i18n';
+import { getPageCopy } from '@/content/pageCopy';
 import { PageHeader } from '@/components/sections/PageHeader';
 import { Steps } from '@/components/sections/Steps';
 import { CtaBand } from '@/components/sections/CtaBand';
@@ -9,16 +11,19 @@ export const metadata: Metadata = {
     'From drive to done: how Tripvia automatically tracks, logs, and reports your business mileage in four simple steps.',
 };
 
-export default function HowItWorksPage() {
+export default async function HowItWorksPage() {
+  const locale = await getCurrentLocale();
+  const copy = getPageCopy(locale).howItWorksPage;
+
   return (
     <>
       <PageHeader
-        eyebrow="How it works"
-        title="From drive to done in four steps"
-        subtitle="Tripvia does the tracking, mapping, and paperwork for you — no manual logging required."
+        eyebrow={copy.eyebrow}
+        title={copy.title}
+        subtitle={copy.subtitle}
       />
-      <Steps />
-      <CtaBand />
+      <Steps locale={locale} />
+      <CtaBand locale={locale} />
     </>
   );
 }

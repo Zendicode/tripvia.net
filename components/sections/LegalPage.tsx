@@ -5,11 +5,13 @@ import { Container } from '@/components/ui/Container';
 export function LegalPage({
   title,
   updated,
+  updatedLabel = 'Last updated',
   children,
   footer,
 }: {
   title: string;
   updated?: string;
+  updatedLabel?: string;
   children: ReactNode;
   /** Optional operator / legal-entity line rendered under a divider. */
   footer?: ReactNode;
@@ -22,7 +24,9 @@ export function LegalPage({
             {title}
           </h1>
           {updated && (
-            <p className="mt-3 text-sm text-ink-muted">Last updated {updated}</p>
+            <p className="mt-3 text-sm text-ink-muted">
+              {updatedLabel} {updated}
+            </p>
           )}
           <div className="mt-8 space-y-8">{children}</div>
           {footer && (

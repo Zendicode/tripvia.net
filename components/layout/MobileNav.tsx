@@ -4,12 +4,20 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { site } from '@/content/site';
+import type { Locale } from '@/lib/i18n';
+import type { SiteCopy } from '@/content/site';
 import { Button } from '@/components/ui/Button';
 import { Logo } from '@/components/graphics/Logo';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 /** Mobile hamburger menu: a slide-in dialog with the nav links and CTA. */
-export function MobileNav() {
+export function MobileNav({
+  locale,
+  copy,
+}: {
+  locale: Locale;
+  copy: SiteCopy;
+}) {
   const [open, setOpen] = useState(false);
   const reduce = useReducedMotion();
 
@@ -32,7 +40,7 @@ export function MobileNav() {
     <div className="md:hidden">
       <button
         type="button"
-        aria-label="Open menu"
+        aria-label={copy.ui.openMenu}
         aria-expanded={open}
         aria-controls="mobile-menu"
         onClick={() => setOpen(true)}
@@ -51,7 +59,7 @@ export function MobileNav() {
           <motion.aside
             role="dialog"
             aria-modal="true"
-            aria-label="Menu"
+            aria-label={copy.ui.menu}
             initial={reduce ? false : { x: '100%' }}
             animate={reduce ? undefined : { x: 0 }}
             transition={{ duration: 0.25, ease: 'easeOut' }}
@@ -61,7 +69,7 @@ export function MobileNav() {
               <Logo />
               <button
                 type="button"
-                aria-label="Close menu"
+                aria-label={copy.ui.closeMenu}
                 onClick={() => setOpen(false)}
                 className="grid h-10 w-10 place-items-center rounded-full text-ink hover:bg-primary-tint"
               >
@@ -70,7 +78,7 @@ export function MobileNav() {
             </div>
 
             <nav className="mt-8 flex flex-col gap-1">
-              {site.nav.map((item) => (
+              {copy.nav.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
@@ -82,13 +90,19 @@ export function MobileNav() {
               ))}
             </nav>
 
+            <LanguageSwitcher
+              locale={locale}
+              label={copy.ui.language}
+              className="mt-6"
+            />
+
             <div className="mt-auto pt-6">
               <Button
                 href="/#download"
                 className="w-full"
                 onClick={() => setOpen(false)}
               >
-                Get the app
+                {copy.ui.getApp}
               </Button>
             </div>
           </motion.aside>

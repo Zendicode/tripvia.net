@@ -3,8 +3,12 @@ import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { Reveal } from '@/components/ui/Reveal';
 import { RouteMap } from '@/components/graphics/RouteMap';
+import type { Locale } from '@/lib/i18n';
+import { getPageCopy } from '@/content/pageCopy';
 
-export function Hero() {
+export function Hero({ locale }: { locale: Locale }) {
+  const copy = getPageCopy(locale).hero;
+
   return (
     <section className="relative overflow-hidden">
       {/* soft background flourishes */}
@@ -22,29 +26,25 @@ export function Hero() {
             <Reveal>
               <span className="inline-flex items-center gap-2 rounded-full bg-primary-tint px-3 py-1 text-xs font-bold text-primary-700">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary-700" />
-                Automatic mileage tracking
+                {copy.badge}
               </span>
             </Reveal>
             <Reveal delay={0.05}>
               <h1 className="mt-5 text-4xl font-extrabold leading-[1.05] tracking-tight text-ink sm:text-5xl lg:text-[3.5rem]">
-                Your business miles,{' '}
-                <span className="text-primary-700">logged automatically.</span>
+                {copy.title}{' '}
+                <span className="text-primary-700">{copy.titleAccent}</span>
               </h1>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="mt-5 text-lg text-ink-muted">
-                Tripvia turns every drive into a compliant trip log book —
-                tracked by GPS, mapped with Google Maps, and exported to PDF or
-                CSV in a single tap.
-              </p>
+              <p className="mt-5 text-lg text-ink-muted">{copy.body}</p>
             </Reveal>
             <Reveal delay={0.15}>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Button href="/#download" size="lg">
-                  Get the app
+                  {copy.primaryCta}
                 </Button>
                 <Button href="/how-it-works" variant="secondary" size="lg">
-                  See how it works
+                  {copy.secondaryCta}
                 </Button>
               </div>
             </Reveal>
@@ -59,7 +59,7 @@ export function Hero() {
                   ))}
                 </span>
                 <span className="text-sm text-ink-muted">
-                  4.8★ average — loved by drivers on the go
+                  {copy.rating}
                 </span>
               </div>
             </Reveal>
@@ -72,16 +72,16 @@ export function Hero() {
               </div>
               <div className="absolute right-3 top-5 rounded-2xl border border-border bg-surface px-4 py-3 shadow-soft">
                 <p className="text-[11px] font-medium text-ink-muted">
-                  This trip
+                  {copy.tripLabel}
                 </p>
                 <p className="text-base font-bold text-ink">
-                  18.2 mi · <span className="text-primary-700">Business</span>
+                  18.2 mi · <span className="text-primary-700">{copy.business}</span>
                 </p>
               </div>
               <div className="absolute bottom-4 left-3 rounded-2xl border border-border bg-surface px-4 py-2.5 shadow-soft">
                 <p className="flex items-center gap-2 text-sm font-semibold text-ink">
                   <span className="h-2 w-2 rounded-full bg-primary" />
-                  Trip auto-detected
+                  {copy.autoDetected}
                 </p>
               </div>
             </div>

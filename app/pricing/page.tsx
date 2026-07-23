@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { getCurrentLocale } from '@/lib/i18n';
+import { getPageCopy } from '@/content/pageCopy';
 import { PageHeader } from '@/components/sections/PageHeader';
 import { PricingTable } from '@/components/sections/PricingTable';
 import { CtaBand } from '@/components/sections/CtaBand';
@@ -9,16 +11,19 @@ export const metadata: Metadata = {
     'Simple pricing for individuals, professionals, and teams. Start free and upgrade when you need unlimited trips and reports.',
 };
 
-export default function PricingPage() {
+export default async function PricingPage() {
+  const locale = await getCurrentLocale();
+  const copy = getPageCopy(locale).pricingPage;
+
   return (
     <>
       <PageHeader
-        eyebrow="Pricing"
-        title="Simple pricing for every driver"
-        subtitle="Start free. Upgrade when you need unlimited trips, cloud sync, and team features."
+        eyebrow={copy.eyebrow}
+        title={copy.title}
+        subtitle={copy.subtitle}
       />
-      <PricingTable />
-      <CtaBand />
+      <PricingTable locale={locale} />
+      <CtaBand locale={locale} />
     </>
   );
 }
