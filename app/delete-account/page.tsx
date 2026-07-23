@@ -28,7 +28,7 @@ export default function DeleteAccountPage() {
       <section className="space-y-3 text-ink-muted">
         <LangLabel>English</LangLabel>
         <p>
-          The fastest way to delete your account is in the app: open the app,
+          To delete your account is in the app: open the app,
           go to <strong className="text-ink">Settings → Delete account</strong>,
           and confirm. Your account and data are deleted immediately.
         </p>
